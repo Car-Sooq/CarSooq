@@ -105,7 +105,7 @@ function authenticateToken(req, res, next) {
 }
 
 app.get('/posts', authenticateToken, (req, res) => {
-    res.status(200).send("you are Authenticated");
+    res.status(200).send("you are authenticated");
 })
 
 //search a car by filtering code
