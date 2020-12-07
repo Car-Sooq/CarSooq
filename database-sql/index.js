@@ -6,8 +6,10 @@ var data = require('./data.json');
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
+
     password: "12345678",
     database: "stock",
+
 });
 
 // connecting mysql and creating 2 tables in our stock; called cars & users
@@ -19,7 +21,7 @@ con.connect(function(err) {
         if (err) throw err;
         console.log("Cars Table created!!!");
     });
-    var Users = "CREATE TABLE IF NOT EXISTS users (id int NOT NULL AUTO_INCREMENT, firstName VARCHAR(20), lastName VARCHAR(20), username VARCHAR(20), email VARCHAR(30), password VARCHAR(255), PRIMARY KEY (id))";
+    var Users = "CREATE TABLE IF NOT EXISTS users (id int NOT NULL AUTO_INCREMENT, firstName VARCHAR(20), lastName VARCHAR(20), username VARCHAR(20), email VARCHAR(230), password VARCHAR(255), PRIMARY KEY (id))";
     con.query(Users, function(err, result) {
         if (err) throw err;
         console.log("Users Table created!!!");
