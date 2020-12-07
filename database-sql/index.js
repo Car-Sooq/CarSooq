@@ -1,15 +1,12 @@
 var mysql = require('mysql');
 var data = require('./data.json');
-
 // //edit your user and password
 // //our database called stock
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-
     password: "12345678",
-    database: "stock",
-
+    database: "stock"
 });
 
 // connecting mysql and creating 2 tables in our stock; called cars & users
@@ -28,7 +25,9 @@ con.connect(function(err) {
     });
 });
 
+
 // //save function to see our cars dummy data in the mysql terminal (insert data in the columns) so we can deal directly with the database
+
 for (var i = 0; i < data.length; i++) {
     var inserting = `REPLACE INTO cars (brand, year, price, colour, description, image,id) VALUES (?, ?, ?, ?, ?, ?, ?) `;
     let rows = [data[i].brand, data[i].year, data[i].price, data[i].colour, data[i].description, data[i].image, i + 1];
@@ -36,5 +35,4 @@ for (var i = 0; i < data.length; i++) {
         if (err) throw err;
     });
 }
-
 module.exports.con = con;
