@@ -7,7 +7,6 @@ const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const path = require('path');
 const bcrypt = require('bcrypt');
-
 app.use(express.json());
 app.use(cors());
 app.use(express.static(__dirname + '/../react-client/dist'));
