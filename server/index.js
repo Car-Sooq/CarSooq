@@ -190,17 +190,9 @@ app.listen(port, () => {
 
 // Add Cars
 
-// app.get(('/'), (req, res) => {
-//     AddCars.find()
-//     // myDB.con.query(query, (err, results) => {
-//     //     res.send(results)
-//     // })
-//     .then(carInfo => res.json(carInfo))
-//     .catch(err => res.status(400).json('Error: '+ err));
-//     console.log('=======');
-// });
 
-app.post('/add',(req, res) => {
+//POST(CREATE) new item
+app.post('/AddCars',(req, res) => {
 
     const brand = req.body.brand;
     const year = req.body.year;
@@ -235,3 +227,9 @@ app.post('/add',(req, res) => {
     // .catch(err => res.status(400).json("Error: " + err));
   });
 
+//GET all cars
+app.get('/',(req, res) => {
+    AddCars.find()
+    .then(carInfo => res.json(carInfo))
+    .catch(err => res.status(400).json('Error: ' + err));
+  });

@@ -20,6 +20,8 @@ import Login from "./components/login.jsx";
 import Signup from "./components/Signup.jsx";
 import NaveBar from "./components/profile.jsx";
 import AddCars from "./components/AddCars.jsx";
+import RenderedCars from "./components/RanderedCars.jsx";
+
 
 class App extends React.Component {
   constructor(props) {
@@ -76,7 +78,11 @@ class App extends React.Component {
       <div>
 
         <Switch>
-         <Route exact path="/add">
+        <Route exact path="/RenderedCars">
+            {" "}
+            <RenderedCars/>
+          </Route>
+         <Route exact path="/AddCars">
             {" "}
             <AddCars/>
           </Route>
