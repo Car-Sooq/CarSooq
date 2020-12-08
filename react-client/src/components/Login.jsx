@@ -56,23 +56,23 @@ export default class Login extends React.Component {
   }
 
   //getting (retrieving) user's data from the server (token)
-  loginHandler(token) {
-    $.ajax({
-      url: "/posts",
-      method: "GET",
-      data: { token },
-      contentType: "application/json",
-      success: function (data) {
-        console.log("get req/login sent successfully!");
-        if (formUsernameIsValid && formPasswordIsValid) {
-          window.location = "http://localhost:3000/profile";
-        }
-      },
-      error: function (err) {
-        console.log(err, "get req/login failed!");
-      },
-    });
-  }
+  // loginHandler(token) {
+  //   $.ajax({
+  //     url: "/posts",
+  //     method: "GET",
+  //     data: { token },
+  //     contentType: "application/json",
+  //     success: function (data) {
+  //       console.log("get req/login sent successfully!");
+  //       if (formUsernameIsValid && formPasswordIsValid) {
+  //         window.location = "http://localhost:3000/profile";
+  //       }
+  //     },
+  //     error: function (err) {
+  //       console.log(err, "get req/login failed!");
+  //     },
+  //   });
+  // }
 
   //send user's data along with the request to the server where we can verify users ans store tokens in their local storage
   handleClick() {

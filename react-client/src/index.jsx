@@ -15,7 +15,7 @@ import {
   Button,
 } from "@material-ui/core";
 import { BrowserRouter } from "react-router-dom";
-import { Route, Switch, Link } from "react-router-dom";
+import { Route, Switch , Link } from "react-router-dom";
 import Login from "./components/login.jsx";
 import Signup from "./components/Signup.jsx";
 import NaveBar from "./components/profile.jsx";

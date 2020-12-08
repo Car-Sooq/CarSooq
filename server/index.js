@@ -47,8 +47,8 @@ app.post('/users', async (req, res) => {
     console.log("Hello hashing", req.body.username)
     try {
         console.log("TRY hashing")
-        const salt = await bcrypt.genSalt();
-        const hashedPassword = await bcrypt.hash(req.body.password, 10); //10 is the salting number
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(req.body.password); //10 is the salting number
         const user = {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
@@ -103,8 +103,8 @@ function authenticateToken(req, res, next) {
         })
     }
 }
-
-app.get('/posts', authenticateToken, (req, res) => {
+// authenticateToken,
+app.get('/posts',  (req, res) => {
     res.status(200).send("you are Authenticated");
 })
 
