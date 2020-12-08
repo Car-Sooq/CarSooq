@@ -17,12 +17,12 @@ app.use(bodyParser.urlencoded({
 }));
 
 //Get request to render all cars in stock db table when opening the inventory page.
-app.get("/allcars", (req, res) => {
-    let query = `SELECT * FROM cars`
-    myDB.con.query(query, (err, results) => {
-        res.send(results)
-    })
-})
+// app.get("/allcars", (req, res) => {
+//     let query = `SELECT * FROM cars`
+//     myDB.con.query(query, (err, results) => {
+//         res.send(results)
+//     })
+// })
 
 const users = [];
 
@@ -187,3 +187,51 @@ app.listen(port, () => {
 //     });
 //     .catch(err => res.status(400).json('Error:' + err));
 // })
+
+// Add Cars
+
+// app.get(('/'), (req, res) => {
+//     AddCars.find()
+//     // myDB.con.query(query, (err, results) => {
+//     //     res.send(results)
+//     // })
+//     .then(carInfo => res.json(carInfo))
+//     .catch(err => res.status(400).json('Error: '+ err));
+//     console.log('=======');
+// });
+
+app.post('/add',(req, res) => {
+
+    const brand = req.body.brand;
+    const year = req.body.year;
+    const colour = req.body.colour;
+
+    // const price = req.body.price;
+    // const description=req.body.description;
+    // myDB.con.query(`Insert into users (firstName, lastName, username, email, password) VALUES ('${firstName}','${lastName}','${username}','${email}','${password}')`), (err, result) => {
+    //     if (err)
+    //         throw err;
+    // }
+    // res.send();
+
+
+
+    myDB.con.query(`Insert into cars (brand, year, colour) VALUES ('${brand}','${year}','${colour}')`), (err, result) => {
+        if (err)
+            throw err;
+    }
+    res.send();
+    //res.send(req.body.brand)
+    // const newCar = new carInfo ({
+    //   brand,
+    //   year,
+    //   colour
+    //   price,
+    //   description
+    // });
+
+    // newCar.save()
+    // .then(() => res.json("Car Added!"))
+    // .catch(err => res.status(400).json("Error: " + err));
+  });
+

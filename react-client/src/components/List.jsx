@@ -20,11 +20,11 @@ export default class List extends React.Component {
   //rendering cars in stock and their info
   render() {
     return (
-      <div>
-        <table>
+      // <div>
+      //   <table>
 
-        </table>
-      </div>
+      //   </table>
+      // </div>
       <Grid container item key={this.props.car.id} xs={4}>
         <Card>
           <CardActionArea>
