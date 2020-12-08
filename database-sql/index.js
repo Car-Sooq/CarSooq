@@ -22,6 +22,8 @@ con.connect(function(err) {
         if (err) throw err;
         console.log("Users Table created!!!");
     });
+    // i am trying to creat table for adding form for sell cars ...
+    var form = "CREATE TABLE IF NOT EXISTS car (brand VARCHAR(20), year YEAR, price INT, colour VARCHAR(20), description VARCHAR(250), image TEXT, id INT PRIMARY KEY )";
 });
 //save function to see our cars dummy data in the mysql terminal (insert data in the columns) so we can deal directly with the database
 for (var i = 0; i < data.length; i++) {

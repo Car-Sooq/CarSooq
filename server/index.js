@@ -164,3 +164,26 @@ app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`)
 });
 
+
+
+// Update ..
+
+// app.post('/...', async (req, res) => {
+// ......findById(req.params.id)
+//     //console.log("Updated ..", )
+//     .then (carForm => {
+//         carForm.brand = req.body.brand;
+//         carForm.year = req.body.year;
+//         carForm.price = req.body.price;
+//         carForm.colour = req.body.colour;
+//         carForm.description = req.body.description;
+//         carForm.image = req.body.image;
+//         carForm.save()
+//         .then(() => res.json("car form is updated .. "))
+//         .catch(err => res.status(400).json('Error:' + err));
+//     })
+//     .catch(err => res.status(400).json('Error:' + err));
+
+//     });
+//     .catch(err => res.status(400).json('Error:' + err));
+// })
