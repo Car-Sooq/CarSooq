@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from "axios";
+import { storage } from "./firebase"
 
 
 export default class AddCars extends Component {
@@ -11,15 +12,19 @@ export default class AddCars extends Component {
         this.onChangeYear = this.onChangeYear.bind(this);
         this.onChangeColour = this.onChangeColour.bind(this);
         // this.onChangePrice = this.onChangePrice.bind(this);
+        this.handleUpload = this.handleUpload.bind(this);
+
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-
+        this.onChangeimg = this.onChangeimg.bind(this);
         this.state = {
           brand: "all",
           year : "2007",
-          colour : "black"
+          colour : "black",
         // price : "jjj",
         // description :""
+        image : null,
+        url: ""
         }
 
       }
@@ -59,12 +64,51 @@ export default class AddCars extends Component {
       }
 
 
+
+      onChangeimg(e) {
+        console.log(e.target.files[0])
+        if(e.target.files[0]){
+          this.setState({
+              image : e.target.files[0]
+            });
+        }else console.log("error in onchangeimg")
+      }
+
+
+
+
+      handleUpload() {
+        // e.preventDefault();
+        const uploadTask = storage.ref(`images/${this.state.image.name}`).put(this.state.image);
+        uploadTask.on(
+          "state_changed",
+          snapshot => {},
+          error => {
+            console.log(error, "error");
+          },
+          () => {
+            storage
+            .ref("images")
+            .child(this.state.image.name)
+            .getDownloadURL()
+            .then(url => {
+              this.setState({
+                url: url
+              })
+               console.log(this.state.url,"im the url")
+            });
+          }
+        )
+      }
+
+
       onSubmit(event) {
         event.preventDefault();
         const carInfo = {
           brand : this.state.brand,
           year : this.state.year,
           colour : this.state.colour,
+          image:this.state.url
         //   price : this.state.price,
           // description : this.state.description
         }
@@ -177,10 +221,20 @@ export default class AddCars extends Component {
           </select>
             </div> */}
 
-            <div>
-                <label>Upload Image</label>
-            </div>
-
+            <br />
+                <div className = "col">
+                    <label>Add Image </label>
+                    <input
+                      type = "file"
+                      // required="true"
+                      // className = "form-control"
+                      // value = {this.state.image}
+                      onChange = {this.onChangeimg}/>
+                      <button onClick = {this.handleUpload}>Upload</button>
+                      <br />
+                      <img width="50px" src = {this.state.url || "http://via.placeholder.com/100x150"} alt = "firebase-image" />
+                  </div>
+                  <br />
             <div>
                 <button type="submit" value = "Submit" onClick = {this.onSubmit}>Submit</button>
             </div>
