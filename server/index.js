@@ -156,6 +156,34 @@ app.post('/inventory', (req, res) => {
 
 
 
+// Add Cars
+
+
+//POST(CREATE) new item
+app.post('/AddCars',(req, res) => {
+
+    const brand = req.body.brand;
+    const year = req.body.year;
+    const colour = req.body.colour;
+
+    myDB.con.query(`Insert into cars (brand, year, colour) VALUES ('${brand}','${year}','${colour}')`, (err, result) => {
+        if (err) throw err;
+    })
+    res.send("car added");
+  });
+
+//GET all cars
+
+  app.get('/render', (req, res) => {
+    // let query = `SELECT * FROM cars`
+    myDB.con.query(`select * from cars`, (err, result) => {
+        if (err) throw err;
+        res.send(result)
+    })
+});
+
+
+
 
   app.delete('/delete/:id', function(req, res) {
     myDB.con.query(`DELETE FROM cars WHERE id = ${req.params.id}`,
@@ -168,6 +196,7 @@ app.post('/inventory', (req, res) => {
             }
         });
  });
+
 
 // Handles any requests that don't match the ones above
 app.get('*', (req, res) => {
@@ -202,52 +231,3 @@ app.listen(port, () => {
 //     });
 //     .catch(err => res.status(400).json('Error:' + err));
 // })
-
-// Add Cars
-
-// app.get(('/'), (req, res) => {
-//     AddCars.find()
-//     // myDB.con.query(query, (err, results) => {
-//     //     res.send(results)
-//     // })
-//     .then(carInfo => res.json(carInfo))
-//     .catch(err => res.status(400).json('Error: '+ err));
-//     console.log('=======');
-// });
-
-app.post('/add',(req, res) => {
-
-    const brand = req.body.brand;
-    const year = req.body.year;
-    const colour = req.body.colour;
-
-    // const price = req.body.price;
-    // const description=req.body.description;
-    // myDB.con.query(`Insert into users (firstName, lastName, username, email, password) VALUES ('${firstName}','${lastName}','${username}','${email}','${password}')`), (err, result) => {
-    //     if (err)
-    //         throw err;
-    // }
-    // res.send();
-
-
-
-    myDB.con.query(`Insert into cars (brand, year, colour) VALUES ('${brand}','${year}','${colour}')`), (err, result) => {
-        if (err)
-            throw err;
-    }
-    res.send();
-    //res.send(req.body.brand)
-    // const newCar = new carInfo ({
-    //   brand,
-    //   year,
-    //   colour
-    //   price,
-    //   description
-    // });
-
-    // newCar.save()
-    // .then(() => res.json("Car Added!"))
-    // .catch(err => res.status(400).json("Error: " + err));
-  });
-
-

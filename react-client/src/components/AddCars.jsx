@@ -115,10 +115,10 @@ export default class AddCars extends Component {
         console.log(carInfo);
         // console.log(this.state.brand);
 
-        axios.post("http://localhost:3000/add", carInfo)
-          .then(res => console.log(res.data));
+        axios.post("http://localhost:3000/AddCars", carInfo)
+        .then(res =>  {console.log(res.data),window.location = '/RenderedCars';} )
 
-       // window.location = '/RenderedCars'
+        .catch(err => res.status(400).json('Error: ' + err));
       }
 
 
