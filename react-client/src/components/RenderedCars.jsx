@@ -1,37 +1,40 @@
 import React, { Component } from "react";
 // import Edit from './edit';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from "axios";
+ const RenderCars = props => (
+     <tr>
+         <td>{props.car.brand}</td>
+         <td>{props.car.year}</td>
+         <td>{props.car.colour}</td>
+         <td>{props.car.id}</td>
+        <td><Link to ={'/Update/'+props.car.id}>Edit</Link></td>
 
-
- const RenderCars = props => {
-console.log(props);
-
-
- }
-
+     </tr>
+ )
 export default class RenderedCars extends Component {
-
     constructor(props) {
         super(props);
-
         this.state = {
           carInfo: []
         }
     }
-
     componentDidMount() {
          axios.get("http://localhost:3000/cars")
             .then( res => {
                 this.setState({carInfo: res.data})
-                console.log(res);
+                // console.log(this.state.carInfo);
             })
             .catch((error) => {
                 console.log(error);
             })
     }
-
-
+   CarsList() {
+        return this.state.carInfo.map(currentItem => {
+            return <RenderCars car = { currentItem } key = {currentItem.id}/>;
+            // deleteItem = { this.deleteItem } key = { currentItem._id }
+        })
+    }
     render() {
         return (
             <div>
@@ -45,16 +48,7 @@ export default class RenderedCars extends Component {
                      </tr>
                  </thead>
                  <tbody>
-                 {this.state.carInfo.map(currentItem => {
-                     return (
-                        <tr>
-                         <td>{currentItem.brand}</td>
-                         <td>{currentItem.year}</td>
-                        <td>{currentItem.colour}</td>
-                       </tr>
-                     )
-
-                 })}
+                     {this.CarsList()}
                  </tbody>
                  </table>
             </div>

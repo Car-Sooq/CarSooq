@@ -183,6 +183,30 @@ app.post('/AddCars',(req, res) => {
     })
 });
 
+// get by ID ..
+app.get('/Update/:id', (req, res) => {
+    // let query = `SELECT * FROM cars`
+
+    myDB.con.query(`select * from cars where id = ${req.params.id}`, (err, result) => {
+        if (err) throw err;
+        res.send(result)
+    })
+});
+
+
+// Update ..
+
+app.post('/Update/:id', (req, res) => {
+    var query = 'UPDATE cars SET brand = ?, year =?, colour = ? WHERE id= ?';
+
+   myDB.con.query(query,[req.body.brand, req.body.year,req.body.colour,req.params.id],(error, results, fields) => {
+    if (error){
+      return console.error(error.message);
+    }
+  });
+})
+
+
 
 // Handles any requests that don't match the ones above
 app.get('*', (req, res) => {
@@ -195,25 +219,3 @@ app.listen(port, () => {
 });
 
 
-
-// Update ..
-
-// app.post('/...', async (req, res) => {
-// ......findById(req.params.id)
-//     //console.log("Updated ..", )
-//     .then (carForm => {
-//         carForm.brand = req.body.brand;
-//         carForm.year = req.body.year;
-//         carForm.price = req.body.price;
-//         carForm.colour = req.body.colour;
-//         carForm.description = req.body.description;
-//         carForm.image = req.body.image;
-//         carForm.save()
-//         .then(() => res.json("car form is updated .. "))
-//         .catch(err => res.status(400).json('Error:' + err));
-//     })
-//     .catch(err => res.status(400).json('Error:' + err));
-
-//     });
-//     .catch(err => res.status(400).json('Error:' + err));
-// })

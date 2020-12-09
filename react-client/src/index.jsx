@@ -21,6 +21,8 @@ import Signup from "./components/Signup.jsx";
 import NaveBar from "./components/profile.jsx";
 import AddCars from "./components/AddCars.jsx";
 import RenderedCars from "./components/RenderedCars.jsx";
+import Update from "./components/Update.jsx";
+
 
 
 class App extends React.Component {
@@ -109,6 +111,9 @@ class App extends React.Component {
               onSubmit={this.handleSubmit.bind(this)}
               cars={this.state.cars}
             />{" "}
+          </Route>
+          <Route path="/Update/:id">
+            <Update />
           </Route>
           <SimpleContainer />
         </Switch>
