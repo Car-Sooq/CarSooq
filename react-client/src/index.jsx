@@ -19,6 +19,7 @@ import { Route, Switch , Link } from "react-router-dom";
 import Login from "./components/login.jsx";
 import Signup from "./components/Signup.jsx";
 import NaveBar from "./components/profile.jsx";
+import AddCars from "./components/AddCars.jsx";
 
 class App extends React.Component {
   constructor(props) {
@@ -73,7 +74,15 @@ class App extends React.Component {
   render() {
     return (
       <div>
+
         <Switch>
+         <Route exact path="/add">
+            {" "}
+            <AddCars/>
+          </Route>
+        {/* <Route exact path ="/Update"
+        {" "}
+        </Route> */}
           <Route exact path="/">
             {" "}
             <Homepage />
