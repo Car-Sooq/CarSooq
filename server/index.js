@@ -155,6 +155,7 @@ app.post('/inventory', (req, res) => {
 });
 
 
+
 // Add Cars
 
 
@@ -180,6 +181,21 @@ app.post('/AddCars',(req, res) => {
         res.send(result)
     })
 });
+
+
+
+
+  app.delete('/delete/:id', function(req, res) {
+    myDB.con.query(`DELETE FROM cars WHERE id = ${req.params.id}`,
+        function(err, result, fields) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log("deleted Record: " + result.affectedRows);
+                res.redirect('/')
+            }
+        });
+ });
 
 
 // Handles any requests that don't match the ones above
