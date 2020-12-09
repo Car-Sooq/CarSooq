@@ -86,8 +86,14 @@ export default class Login extends React.Component {
       success: function (data) {
         console.log("POST req/handleClick sent successfully!");
         localStorage.setItem("token", data);
-        window.location = "/profile";
-        that.loginHandler(data);
+       $.ajax({
+        url: "/profile",
+        method: "GET"
+        success: function(){
+          console.log('i will go get the profile')
+        }
+       })
+        //that.loginHandler(data);
       },
       error: function (err) {
         console.log(err, "POST req/handleClick failed!");

@@ -1,5 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import React, { Component } from 'react';
+
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -9,6 +11,8 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import { BrowserRouter } from "react-router-dom";
 import { Route, Switch, Link } from "react-router-dom";
+import { Link ,withRouter } from "react-router-dom" ;
+
 import { styled } from "@material-ui/core/styles";
 import PersonIcon from "@material-ui/icons/Person";
 import Paper from "@material-ui/core/Paper";
@@ -28,6 +32,7 @@ const MyButton = styled(Button)({
   backgroundColor: "#0A194F",
   color: "#F9FBE7",
 });
+// const profile = require('./profileBackend')
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -95,7 +100,6 @@ export default function NaveBar() {
 //when user clcks on logout => dlete token from local storage
 function handleLogoutClick(e) {
   e.preventDefault();
-  console.log("The link was clicked.");
   localStorage.clear();
   window.location = "http://localhost:3000/";
 }

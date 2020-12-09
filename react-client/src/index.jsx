@@ -7,6 +7,8 @@ import { styled } from "@material-ui/core/styles";
 import Search from "./components/Search.jsx";
 import SimpleContainer from "./components/qout.jsx";
 import Homepage from "./components/Home.jsx";
+import { Route, Redirect } from 'react-router-dom';
+
 import {
   AppBar,
   Toolbar,
@@ -20,6 +22,68 @@ import Login from "./components/login.jsx";
 import Signup from "./components/Signup.jsx";
 import NaveBar from "./components/profile.jsx";
 import AddCars from "./components/AddCars.jsx";
+// creat protected routs
+function ProtectedRoute({isAuth : isAuth, component:Component, ...rest}){
+  return(
+      <Route
+      {...rest}
+      render={(props)=>{
+if (isAuth){
+  return <Component/>;
+}
+else
+{
+  return (
+  <Redirect to= {{pathname : '/login', state: {from: props.location}}}/>
+     )
+  }
+}}/>
+);
+}
+//creating Private Routes
+// const PrivateRoute = ({component: Component, ...rest}) => {
+//   return (
+//   //  ender={(props)=>{
+//       // if (isAuth){
+//       //     return <Component/>;
+//       // }
+//       // Show the component only when the user is logged in
+//       // Otherwise, redirect the user to /signin page
+//       <Route {...rest} render={props => (
+//           localStorage ?
+//               <Component {...props} />
+//           : <Redirect to="/signin" />
+//       )} />
+//   );
+// };
+
+function ProtectedRoute({isAuth : isAuth, component:Component, ...rest}){
+      return(
+          <Route
+          {...rest}
+          render={(props)=>{
+  if (isAuth){
+      return <Component/>;
+  }
+  else
+  {
+      return (
+      <Redirect to= {{pathname : '/login', state: {from: props.location}}}/>
+         )
+      }
+    }}/>
+  );
+  }
+//virfy token
+const jwt =require('jsonwebtoken');
+var dotenv=require('dotenv');
+
+
+
+
+
+
+ //module.exports={requireAuth}
 
 class App extends React.Component {
   constructor(props) {
@@ -90,13 +154,20 @@ class App extends React.Component {
           <Route exact path="/login">
             <Login />
           </Route>
-          <Route exact path="/profile">
+          {/* <ProtectedRoute  path="/profile"
+            //  {" "}
+            // {<NaveBar />}
+           component={NaveBar} isAuth={localStorage.length > 0}
+          /> */}
+          {/* <ProtectedRoute exact path="/profile">
             {" "}
+            component={ItemsList} isAuth={localStorage.length>0}
             <NaveBar />
-          </Route>
+        /> */}
           <Route exact path="/signup">
             <Signup />
           </Route>
+
           <Route exact path="/inventory">
             {" "}
             <Search

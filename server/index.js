@@ -35,12 +35,12 @@ app.post('/signup',async (req, res) => {
    // let password = req.body.password
     const salt = await bcrypt.genSalt(10);
     //10 is the salting number
-    const password = await bcrypt.hash(req.body.password, salt);
-    myDB.con.query(`Insert into users (firstName, lastName, username, email, password) VALUES ('${firstName}','${lastName}','${username}','${email}','${password}')`), (err, result) => {
+    const hashedpassword = await bcrypt.hash(req.body.password, salt);
+    myDB.con.query(`Insert into users (firstName, lastName, username, email, password) VALUES ('${firstName}','${lastName}','${username}','${email}','${hashedpassword}')`), (err, result) => {
         if (err)
             throw err;
     }
-    res.send(password);
+    res.send(hashedpassword);
 })
 
 //Login

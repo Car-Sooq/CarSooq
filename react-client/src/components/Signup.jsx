@@ -66,14 +66,14 @@ export default class Signup extends React.Component {
       password: this.state.password,
     };
     if (
-      info.firstName == "" ||
-      info.lastName == "" ||
-      info.username == "" ||
-      info.email == ""
+      user.firstName == "" ||
+      user.lastName == "" ||
+      user.username == "" ||
+      user.email == ""
     ) {
       alert("Please fill in a valid value for all required fields!");
     }
-    if (0 < info.password.length && info.password.length < 8) {
+    if (0 < user.password.length && user.password.length < 8) {
       alert("Your password is too short, try to make it 8 chars or more!");
     } else {
 
