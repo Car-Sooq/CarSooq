@@ -167,7 +167,7 @@ app.post('/AddCars',(req, res) => {
     const colour = req.body.colour;
     const image = req.body.image;
 
-    myDB.con.query(`Insert into cars (brand, year, colour,image) VALUES ('${brand}','${year}','${colour}','${colour}')`, (err, result) => {
+    myDB.con.query(`Insert into cars (brand, year, colour,image) VALUES ('${brand}','${year}','${colour}','${image}')`, (err, result) => {
         if (err) throw err;
     })
     res.send("car added");
