@@ -6,9 +6,10 @@ import axios from "axios";
 
  const RenderCars = props => (
      <tr>
-         <td>{props.item.brand}</td>
-         <td>{props.item.year}</td>
-         <td>{props.item.colour}</td>
+         <td>{props.car.brand}</td>
+         <td>{props.car.year}</td>
+         <td>{props.car.colour}</td>
+         <td><Link to ={'/Update/'+currentItem.id}>Edit</Link></td>
      </tr>
  )
 

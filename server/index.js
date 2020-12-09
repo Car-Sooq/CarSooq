@@ -196,7 +196,15 @@ app.post('/AddCars',(req, res) => {
             }
         });
  });
-
+//Update
+ app.post('/Update/:id', (req, res) => {
+    var query = 'UPDATE cars SET brand = ?, year =?, colour = ? WHERE id= ?';
+   myDB.con.query(query,[req.body.brand, req.body.year,req.body.colour,req.params.id],(error, results, fields) => {
+    if (error){
+      return console.error(error.message);
+    }
+  });
+})
 
 // Handles any requests that don't match the ones above
 app.get('*', (req, res) => {

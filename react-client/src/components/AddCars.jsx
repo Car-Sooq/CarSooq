@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import { storage } from "./firebase"
+// import TextField from "@material-ui/core/TextField";
+import Button from '@material-ui/core/Button';
+
+
 
 
 export default class AddCars extends Component {
@@ -126,6 +130,8 @@ export default class AddCars extends Component {
         return (
 
         <div>
+          {/* <form className={classes.root} noValidate autoComplete="off"> */}
+
              <p>Add Car Form</p>
 
              <div>
@@ -236,8 +242,12 @@ export default class AddCars extends Component {
                   </div>
                   <br />
             <div>
-                <button type="submit" value = "Submit" onClick = {this.onSubmit}>Submit</button>
+            <Button variant="outlined" color="secondary" type="submit" value = "Submit" onClick = {this.onSubmit}>
+              Submit
+            </Button>
+                {/* <button type="submit" value = "Submit" onClick = {this.onSubmit}>Submit</button> */}
             </div>
+            {/* </form> */}
         </div>
 
         )

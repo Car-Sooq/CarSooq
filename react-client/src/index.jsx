@@ -1,12 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import $ from "jquery";
+
 import Header from "./components/header.jsx";
 import Box from "@material-ui/core/Box";
 import { styled } from "@material-ui/core/styles";
 import Search from "./components/Search.jsx";
 import SimpleContainer from "./components/qout.jsx";
 import Homepage from "./components/Home.jsx";
+import Update from "./components/Update.jsx";
 import {
   AppBar,
   Toolbar,
@@ -102,6 +104,9 @@ class App extends React.Component {
           </Route>
           <Route exact path="/signup">
             <Signup />
+          </Route>
+          <Route exact path="/update">
+            <Update />
           </Route>
           <Route exact path="/inventory">
             {" "}
