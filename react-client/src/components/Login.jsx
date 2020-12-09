@@ -166,3 +166,11 @@ export default class Login extends React.Component {
     );
   }
 }
+
+// mysql://
+// bc7eadcb51dbab
+// :
+// cc2fcc61
+// @
+// us-cdbr-east-02.cleardb.com
+// /heroku_884141679345aa3?reconnect=true
