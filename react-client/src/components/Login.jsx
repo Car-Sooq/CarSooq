@@ -65,7 +65,7 @@ export default class Login extends React.Component {
   //     success: function (data) {
   //       console.log("get req/login sent successfully!");
   //       if (formUsernameIsValid && formPasswordIsValid) {
-  //         window.location = "http://localhost:3000/profile";
+  //         window.location = "/profile";
   //       }
   //     },
   //     error: function (err) {
@@ -86,6 +86,7 @@ export default class Login extends React.Component {
       success: function (data) {
         console.log("POST req/handleClick sent successfully!");
         localStorage.setItem("token", data);
+        window.location = "/profile";
         that.loginHandler(data);
       },
       error: function (err) {

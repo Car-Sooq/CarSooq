@@ -27,42 +27,44 @@ app.get("/allcars", (req, res) => {
 const users = [];
 
 //save data from signup page to users table in mysql
-app.post('/signup', (req, res) => {
+app.post('/signup',async (req, res) => {
     let firstName = req.body.firstName;
     let lastName = req.body.lastName
     let username = req.body.username
     let email = req.body.email
-    let password = req.body.password
-
+   // let password = req.body.password
+    const salt = await bcrypt.genSalt(10);
+    //10 is the salting number
+    const password = await bcrypt.hash(req.body.password, salt);
     myDB.con.query(`Insert into users (firstName, lastName, username, email, password) VALUES ('${firstName}','${lastName}','${username}','${email}','${password}')`), (err, result) => {
         if (err)
             throw err;
     }
-    res.send();
+    res.send(password);
 })
 
 //Login
 //dealing with passwords (hashing and salting)
-app.post('/users', async (req, res) => {
-    console.log("Hello hashing", req.body.username)
-    try {
-        console.log("TRY hashing")
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(req.body.password); //10 is the salting number
-        const user = {
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            username: req.body.username,
-            email: req.body.email,
-            password: hashedPassword
-        };
-        users.push(user);
-        res.send(user);
-    } catch {
-        console.log("CATCH hashing")
-        res.status(500).send();
-    }
-})
+// app.post('/users', async (req, res) => {
+//     console.log("Hello hashing", req.body.username)
+//     try {
+//         console.log("TRY hashing")
+//         const salt = await bcrypt.genSalt(10);
+//         const hashedPassword = await bcrypt.hash(req.body.password); //10 is the salting number
+//         const user = {
+//             firstName: req.body.firstName,
+//             lastName: req.body.lastName,
+//             username: req.body.username,
+//             email: req.body.email,
+//             password: hashedPassword
+//         };
+//         users.push(user);
+//         res.send(user);
+//     } catch {
+//         console.log("CATCH hashing")
+//         res.status(500).send();
+//     }
+// })
 
 //compare users from login page with db, if the user is verified, give him a token if not, detect if the user exist or if his username matches with his hashed password
 app.post('/login', async (req, res) => {
@@ -77,9 +79,9 @@ app.post('/login', async (req, res) => {
                     const accessToken = jwt.sign({
                         username: username
                     }, process.env.ACCESS_TOKEN_SECRET);
-                    res.json({
-                        accessToken: accessToken
-                    });
+                    res.header({accessToken: accessToken}
+
+                    ).send(accessToken);
                 } else {
                     res.send("wrong username/password combination")
                 }
