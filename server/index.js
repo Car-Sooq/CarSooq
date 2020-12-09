@@ -165,8 +165,9 @@ app.post('/AddCars',(req, res) => {
     const brand = req.body.brand;
     const year = req.body.year;
     const colour = req.body.colour;
+    const image = req.body.image;
 
-    myDB.con.query(`Insert into cars (brand, year, colour) VALUES ('${brand}','${year}','${colour}')`, (err, result) => {
+    myDB.con.query(`Insert into cars (brand, year, colour,image) VALUES ('${brand}','${year}','${colour}','${colour}')`, (err, result) => {
         if (err) throw err;
     })
     res.send("car added");
@@ -174,11 +175,12 @@ app.post('/AddCars',(req, res) => {
 
 //GET all cars
 
-  app.get('/render', (req, res) => {
+  app.get('/cars', (req, res) => {
     // let query = `SELECT * FROM cars`
     myDB.con.query(`select * from cars`, (err, result) => {
         if (err) throw err;
         res.send(result)
+        console.log(result,"heyyyy")
     })
 });
 
