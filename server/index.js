@@ -17,12 +17,12 @@ app.use(bodyParser.urlencoded({
 }));
 
 //Get request to render all cars in stock db table when opening the inventory page.
-app.get("/allcars", (req, res) => {
-    let query = `SELECT * FROM cars`
-    myDB.con.query(query, (err, results) => {
-        res.send(results)
-    })
-})
+// app.get("/allcars", (req, res) => {
+//     let query = `SELECT * FROM cars`
+//     myDB.con.query(query, (err, results) => {
+//         res.send(results)
+//     })
+// })
 
 const users = [];
 
@@ -105,7 +105,7 @@ function authenticateToken(req, res, next) {
 }
 
 app.get('/posts', authenticateToken, (req, res) => {
-    res.status(200).send("you are Authenticated");
+    res.status(200).send("you are authenticated");
 })
 
 //search a car by filtering code
@@ -164,3 +164,72 @@ app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`)
 });
 
+
+
+// Update ..
+
+// app.post('/...', async (req, res) => {
+// ......findById(req.params.id)
+//     //console.log("Updated ..", )
+//     .then (carForm => {
+//         carForm.brand = req.body.brand;
+//         carForm.year = req.body.year;
+//         carForm.price = req.body.price;
+//         carForm.colour = req.body.colour;
+//         carForm.description = req.body.description;
+//         carForm.image = req.body.image;
+//         carForm.save()
+//         .then(() => res.json("car form is updated .. "))
+//         .catch(err => res.status(400).json('Error:' + err));
+//     })
+//     .catch(err => res.status(400).json('Error:' + err));
+
+//     });
+//     .catch(err => res.status(400).json('Error:' + err));
+// })
+
+// Add Cars
+
+
+//POST(CREATE) new item
+app.post('/AddCars',(req, res) => {
+
+    const brand = req.body.brand;
+    const year = req.body.year;
+    const colour = req.body.colour;
+
+    // const price = req.body.price;
+    // const description=req.body.description;
+    // myDB.con.query(`Insert into users (firstName, lastName, username, email, password) VALUES ('${firstName}','${lastName}','${username}','${email}','${password}')`), (err, result) => {
+    //     if (err)
+    //         throw err;
+    // }
+    // res.send();
+
+
+
+    myDB.con.query(`Insert into cars (brand, year, colour) VALUES ('${brand}','${year}','${colour}')`), (err, result) => {
+        if (err)
+            throw err;
+    }
+    res.send();
+    //res.send(req.body.brand)
+    // const newCar = new carInfo ({
+    //   brand,
+    //   year,
+    //   colour
+    //   price,
+    //   description
+    // });
+
+    // newCar.save()
+    // .then(() => res.json("Car Added!"))
+    // .catch(err => res.status(400).json("Error: " + err));
+  });
+
+//GET all cars
+app.get('/',(req, res) => {
+    AddCars.find()
+    .then(carInfo => res.json(carInfo))
+    .catch(err => res.status(400).json('Error: ' + err));
+  });
