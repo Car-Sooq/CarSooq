@@ -17,7 +17,9 @@ export default class RenderedCars extends Component {
 
         this.state = {
           carInfo: []
+
         }
+        this.deleteItem=this.deleteItem.bind(this)
     }
 
     componentDidMount() {
@@ -32,6 +34,16 @@ export default class RenderedCars extends Component {
     }
 
 
+    deleteItem(id) {
+
+        axios.delete("/delete/" + id)
+            .then(res => console.log(res.data));
+
+        this.setState({
+            carInfo: this.state.carInfo.filter(el => el.id !== id)
+        })
+    }
+
     render() {
         return (
             <div>
@@ -42,6 +54,7 @@ export default class RenderedCars extends Component {
                          <th>Brand</th>
                          <th>Year</th>
                          <th>colour</th>
+                         <th>image</th>
                      </tr>
                  </thead>
                  <tbody>
@@ -51,6 +64,10 @@ export default class RenderedCars extends Component {
                          <td>{currentItem.brand}</td>
                          <td>{currentItem.year}</td>
                         <td>{currentItem.colour}</td>
+                      <td><img src= {currentItem.image} width="200" height="200" class="w3-round" alt="Norway"/></td>
+                      <button
+                       onClick = {() => {this.deleteItem(currentItem.id)}}
+                      >Delete</button>
                        </tr>
                      )
 

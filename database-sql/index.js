@@ -5,7 +5,7 @@ var data = require('./data.json');
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "11111111",
+    password: "0000",
     database: "stock"
 });
 
@@ -24,7 +24,7 @@ con.connect(function(err) {
         console.log("Users Table created!!!");
     });
     // i am trying to creat table for adding form for sell cars ...
-    var form = "CREATE TABLE IF NOT EXISTS car (brand VARCHAR(20), year YEAR, price INT, colour VARCHAR(20), description VARCHAR(250), image TEXT, id INT PRIMARY KEY )";
+    // var form = "CREATE TABLE IF NOT EXISTS cars (brand VARCHAR(20), year YEAR, price INT, colour VARCHAR(20), description VARCHAR(250), image TEXT, id INT PRIMARY KEY )";
 });
 // save function to see our cars dummy data in the mysql terminal (insert data in the columns) so we can deal directly with the database
 // for (var i = 0; i < data.length; i++) {
