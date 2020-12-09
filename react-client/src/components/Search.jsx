@@ -19,7 +19,7 @@ var MyTypography = styled(Typography)({
 export default class Search extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { brand: "", year: "", colour: "", price: "" };
+    this.state = { brand: "", year: "", colour: ""};
   }
 
   onChangeBrandHandler(event) {
@@ -55,16 +55,16 @@ export default class Search extends React.Component {
     );
   }
 
-  onChangePriceHandler(event) {
-    this.setState(
-      {
-        price: event.target.value,
-      },
-      () => {
-        this.props.onSubmit(this.state);
-      },
-    );
-  }
+  // onChangePriceHandler(event) {
+  //   this.setState(
+  //     {
+  //       price: event.target.value,
+  //     },
+  //     () => {
+  //       this.props.onSubmit(this.state);
+  //     },
+  //   );
+  // }
 
   //search by using filters with the options in stock
   render() {
@@ -147,7 +147,7 @@ export default class Search extends React.Component {
             <option value="orange">Orange</option>
           </Select>
         </FormControl>{" "}
-        <FormControl variant="filled">
+        {/* <FormControl variant="filled">
           <InputLabel
             htmlFor="filled-age-native-simple"
             style={{ margin: "50px 10px 10px 0px" }}>
@@ -166,7 +166,7 @@ export default class Search extends React.Component {
             <option value="highestToLowest">Highest to lowest</option>
             <option value="lowestToHighest">Lowest to highest</option>
           </Select>
-        </FormControl>
+        </FormControl> */}
         </div>
         {list(this.props)}
         <Grid>

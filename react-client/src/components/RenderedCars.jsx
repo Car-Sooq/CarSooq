@@ -4,13 +4,11 @@ import React, { Component } from "react";
 import axios from "axios";
 
 
- const RenderCars = props => (
-     <tr>
-         <td>{props.item.brand}</td>
-         <td>{props.item.year}</td>
-         <td>{props.item.colour}</td>
-     </tr>
- )
+ const RenderCars = props => {
+console.log(props);
+
+
+ }
 
 export default class RenderedCars extends Component {
 
@@ -23,26 +21,18 @@ export default class RenderedCars extends Component {
     }
 
     componentDidMount() {
-         axios.get("http://localhost:3000/render")
+         axios.get("http://localhost:3000/cars")
             .then( res => {
                 this.setState({carInfo: res.data})
-                // console.log(this.state.carInfo);
+                console.log(res);
             })
             .catch((error) => {
                 console.log(error);
             })
     }
 
-   CarsList() {
-        return this.state.carInfo.map(currentItem => {
-            return <RenderCars car = { currentItem }/>;
-            // deleteItem = { this.deleteItem } key = { currentItem._id }
-        })
-    }
-
 
     render() {
-
         return (
             <div>
                   <h2>Cars</h2>
@@ -55,7 +45,16 @@ export default class RenderedCars extends Component {
                      </tr>
                  </thead>
                  <tbody>
-                     {this.CarsList()}
+                 {this.state.carInfo.map(currentItem => {
+                     return (
+                        <tr>
+                         <td>{currentItem.brand}</td>
+                         <td>{currentItem.year}</td>
+                        <td>{currentItem.colour}</td>
+                       </tr>
+                     )
+
+                 })}
                  </tbody>
                  </table>
             </div>
