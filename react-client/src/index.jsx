@@ -20,7 +20,7 @@ import Login from "./components/login.jsx";
 import Signup from "./components/Signup.jsx";
 import NaveBar from "./components/profile.jsx";
 import AddCars from "./components/AddCars.jsx";
-import RenderedCars from "./components/RanderedCars.jsx";
+import RenderedCars from "./components/RenderedCars.jsx";
 
 
 class App extends React.Component {
