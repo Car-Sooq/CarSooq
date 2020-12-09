@@ -154,6 +154,21 @@ app.post('/inventory', (req, res) => {
     }
 });
 
+
+
+
+  app.delete('/delete/:id', function(req, res) {
+    myDB.con.query(`DELETE FROM cars WHERE id = ${req.params.id}`,
+        function(err, result, fields) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log("deleted Record: " + result.affectedRows);
+                res.redirect('/')
+            }
+        });
+ });
+
 // Handles any requests that don't match the ones above
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/../react-client/dist/index.html'));
@@ -234,4 +249,5 @@ app.post('/add',(req, res) => {
     // .then(() => res.json("Car Added!"))
     // .catch(err => res.status(400).json("Error: " + err));
   });
+
 
