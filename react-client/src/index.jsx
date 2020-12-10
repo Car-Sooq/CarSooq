@@ -1,12 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import $ from "jquery";
+
 import Header from "./components/header.jsx";
 import Box from "@material-ui/core/Box";
 import { styled } from "@material-ui/core/styles";
 import Search from "./components/Search.jsx";
 import SimpleContainer from "./components/qout.jsx";
 import Homepage from "./components/Home.jsx";
+import Update from "./components/Update.jsx";
 import {
   AppBar,
   Toolbar,
@@ -21,6 +23,10 @@ import Signup from "./components/Signup.jsx";
 import NaveBar from "./components/profile.jsx";
 import AddCars from "./components/AddCars.jsx";
 import RenderedCars from "./components/RenderedCars.jsx";
+import AboutUs from "./components/qout.jsx";
+import Footer from "./components/footer.jsx";
+import ProtectedRoute from './components/ProtectedRoute.jsx';
+
 
 
 class App extends React.Component {
@@ -76,42 +82,48 @@ class App extends React.Component {
   render() {
     return (
       <div>
-
         <Switch>
+        <Route exact path="/about">
+            <AboutUs/>
+          </Route>
+
         <Route exact path="/RenderedCars">
-            {" "}
             <RenderedCars/>
           </Route>
+
          <Route exact path="/AddCars">
-            {" "}
             <AddCars/>
           </Route>
-        {/* <Route exact path ="/Update"
-        {" "}
-        </Route> */}
+
           <Route exact path="/">
-            {" "}
             <Homepage />
           </Route>
+
           <Route exact path="/login">
             <Login />
           </Route>
-          <Route exact path="/profile">
-            {" "}
-            <NaveBar />
-          </Route>
+
+          <ProtectedRoute  path="/profile"
+            component={NaveBar} isAuth={localStorage.length > 0}
+          />
+
           <Route exact path="/signup">
             <Signup />
           </Route>
+
+          <Route exact path="/update">
+            <Update />
+          </Route>
+]
           <Route exact path="/inventory">
-            {" "}
             <Search
               onSubmit={this.handleSubmit.bind(this)}
               cars={this.state.cars}
-            />{" "}
+            />
           </Route>
-          <SimpleContainer />
         </Switch>
+        <br /><br />
+        <Footer />
       </div>
     );
   }

@@ -5,7 +5,7 @@ var data = require('./data.json');
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "0000",
+    password: "12345678",
     database: "stock"
 });
 

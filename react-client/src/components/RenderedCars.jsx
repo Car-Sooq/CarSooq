@@ -1,14 +1,19 @@
 import React, { Component } from "react";
 // import Edit from './edit';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from "axios";
+import Header from "./header.jsx"
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+// import TableFooter from '@material-ui/core/TableFooter';
+// import TablePagination from '@material-ui/core/TablePagination';
+import TableRow from '@material-ui/core/TableRow';
+import TableHead from '@material-ui/core/TableHead';
+import Button from "@material-ui/core/Button";
 
 
- const RenderCars = props => {
-console.log(props);
-
-
- }
 
 export default class RenderedCars extends Component {
 
@@ -46,35 +51,52 @@ export default class RenderedCars extends Component {
 
     render() {
         return (
-            <div>
-                  <h2>Cars</h2>
-                 <table className = "table">
-                 <thead className = "thead">
-                     <tr>
-                         <th>Brand</th>
-                         <th>Year</th>
-                         <th>colour</th>
-                         <th>image</th>
-                     </tr>
-                 </thead>
-                 <tbody>
-                 {this.state.carInfo.map(currentItem => {
-                     return (
-                        <tr>
-                         <td>{currentItem.brand}</td>
-                         <td>{currentItem.year}</td>
-                        <td>{currentItem.colour}</td>
-                      <td><img src= {currentItem.image} width="200" height="200" class="w3-round" alt="Norway"/></td>
-                      <button
-                       onClick = {() => {this.deleteItem(currentItem.id)}}
-                      >Delete</button>
-                       </tr>
-                     )
+            <div style={{ width: '100%' }}>
+                <Header></Header>
+                <br /><br />
+                <br /><br />
 
+                <Table id="container" style = {{ width: 400, margin: 'auto' }}>
+                <TableContainer>
+
+                 <h2 style = {{color:"#c94000", fontFamily: "Century Gothic"}}>Cars</h2>
+
+                  <thead>
+                      <TableHead>
+                          <TableCell>Brand</TableCell>
+                          <TableCell>Year</TableCell>
+                          <TableCell>Color</TableCell>
+                          <TableCell>Image</TableCell>
+                      </TableHead>
+                  </thead>
+                  <TableBody>
+                  {this.state.carInfo.map(currentItem => {
+                     return (
+                        <TableHead>
+                         <TableCell>{currentItem.brand}</TableCell>
+                         <TableCell>{currentItem.year}</TableCell>
+                         <TableCell>{currentItem.colour}</TableCell>
+                         <TableCell>
+                            <img src= {currentItem.image} width="300" height="200" class="w3-round" alt="Norway"/>
+                         </TableCell>
+                         <Button variant="outlined" style = {{color:"#c94000"}} type="submit" value = "Submit"
+                          onClick = {() => {this.deleteItem(currentItem.id)}}>
+                            Delete
+                        </Button>
+                        {/* <TableCell><Link to ={'/Update/:id'+currentItem.id}>Edit</Link></TableCell> */}
+                        </TableHead>
+                     )
                  })}
-                 </tbody>
-                 </table>
-            </div>
+                 </TableBody>
+                 </TableContainer>
+                </Table>
+             </div>
+
         )
     }
 }
+
+                {/* </Header> */}
+                {/*}
+                <br /><br />
+                <br /><br /> */}
