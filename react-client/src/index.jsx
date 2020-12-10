@@ -7,8 +7,6 @@ import { styled } from "@material-ui/core/styles";
 import Search from "./components/Search.jsx";
 import SimpleContainer from "./components/qout.jsx";
 import Homepage from "./components/Home.jsx";
-import { Route, Redirect } from 'react-router-dom';
-
 import {
   AppBar,
   Toolbar,
@@ -16,71 +14,12 @@ import {
   Typography,
   Button,
 } from "@material-ui/core";
-import { BrowserRouter } from "react-router-dom";
-import { Route, Switch , Link } from "react-router-dom";
+import { BrowserRouter, Route, Switch , Link, Redirect} from "react-router-dom";
 import Login from "./components/login.jsx";
 import Signup from "./components/Signup.jsx";
 import NaveBar from "./components/profile.jsx";
 import AddCars from "./components/AddCars.jsx";
-// creat protected routs
-function ProtectedRoute({isAuth : isAuth, component:Component, ...rest}){
-  return(
-      <Route
-      {...rest}
-      render={(props)=>{
-if (isAuth){
-  return <Component/>;
-}
-else
-{
-  return (
-  <Redirect to= {{pathname : '/login', state: {from: props.location}}}/>
-     )
-  }
-}}/>
-);
-}
-//creating Private Routes
-// const PrivateRoute = ({component: Component, ...rest}) => {
-//   return (
-//   //  ender={(props)=>{
-//       // if (isAuth){
-//       //     return <Component/>;
-//       // }
-//       // Show the component only when the user is logged in
-//       // Otherwise, redirect the user to /signin page
-//       <Route {...rest} render={props => (
-//           localStorage ?
-//               <Component {...props} />
-//           : <Redirect to="/signin" />
-//       )} />
-//   );
-// };
-
-function ProtectedRoute({isAuth : isAuth, component:Component, ...rest}){
-      return(
-          <Route
-          {...rest}
-          render={(props)=>{
-  if (isAuth){
-      return <Component/>;
-  }
-  else
-  {
-      return (
-      <Redirect to= {{pathname : '/login', state: {from: props.location}}}/>
-         )
-      }
-    }}/>
-  );
-  }
-//virfy token
-const jwt =require('jsonwebtoken');
-var dotenv=require('dotenv');
-
-
-
-
+import ProtectedRoute from './components/ProtectedRoute.jsx';
 
 
  //module.exports={requireAuth}
@@ -154,16 +93,14 @@ class App extends React.Component {
           <Route exact path="/login">
             <Login />
           </Route>
-          {/* <ProtectedRoute  path="/profile"
-            //  {" "}
-            // {<NaveBar />}
+        <ProtectedRoute  path="/profile"
+
+
            component={NaveBar} isAuth={localStorage.length > 0}
-          /> */}
-          {/* <ProtectedRoute exact path="/profile">
-            {" "}
-            component={ItemsList} isAuth={localStorage.length>0}
-            <NaveBar />
-        /> */}
+          />
+        //  <Route exact path="/profile">
+        //     <Signup />
+          </Route>
           <Route exact path="/signup">
             <Signup />
           </Route>

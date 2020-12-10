@@ -92,23 +92,47 @@ app.post('/login', async (req, res) => {
     })
 })
 
+
 //verify the token before let the user enter a private route
-function authenticateToken(req, res, next) {
-    const token = req.query.token.accessToken;
-    if (!token)
-        res.status(400).send("we need a token");
-    else {
-        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-            if (err) res.status(400).send("you failed to authenticate")
-            req.userId = user;
-            next()
-        })
+// function authenticateToken(req, res, next) {
+//     const token = req.query.token.accessToken;
+//     if (!token)
+//         res.status(400).send("we need a token");
+//     else {
+//         jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+//             if (err) res.status(400).send("you failed to authenticate")
+//             req.userId = user;
+//             next()
+//         })
+//     }
+// }
+function authenticateToken (req, res,next){
+    const token = req.header('addUser-token');
+    if(!token) return res.redirect('/login');
+
+    try{
+    const verified = jwt.verify(token, process.env.JWT_SECRET)
+    req.user = verified;
+
+    console.log(verified)
+    next();
+
     }
-}
-// authenticateToken,
-app.get('/posts',  (req, res) => {
+    catch(err){
+    res.status(400).send('fuckkkkkkkkkkkkk')
+    }
+
+     }
+
+//
+app.get('/posts', (req, res) => {
     res.status(200).send("you are Authenticated");
 })
+// app.get('/profile',authenticateToken,  (req, res) => {
+
+//     console.log(req)
+//     res.sendFile(path.join(__dirname + '/../react-client/dist/index.html'));
+// });
 
 //search a car by filtering code
 app.post('/inventory', (req, res) => {

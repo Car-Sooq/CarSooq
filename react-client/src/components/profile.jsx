@@ -1,7 +1,6 @@
-import React from "react";
+//import React from "react";
 import ReactDOM from "react-dom";
 import React, { Component } from 'react';
-
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -9,9 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import { Button } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-import { BrowserRouter } from "react-router-dom";
-import { Route, Switch, Link } from "react-router-dom";
-import { Link ,withRouter } from "react-router-dom" ;
+import { Link ,withRouter,Route,BrowserRouter } from "react-router-dom" ;
 
 import { styled } from "@material-ui/core/styles";
 import PersonIcon from "@material-ui/icons/Person";
@@ -47,7 +44,7 @@ var MyBox = styled(Box)({
   backgroundColor: "#0A194F",
 });
 
-export default function NaveBar() {
+function NaveBar() {
   const classes = useStyles();
   return (
     <div className={classes.root} >
@@ -103,3 +100,5 @@ function handleLogoutClick(e) {
   localStorage.clear();
   window.location = "http://localhost:3000/";
 }
+
+export default withRouter(NaveBar)
