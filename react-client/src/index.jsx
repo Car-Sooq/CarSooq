@@ -19,6 +19,11 @@ import { Route, Switch, Link } from "react-router-dom";
 import Login from "./components/login.jsx";
 import Signup from "./components/Signup.jsx";
 import NaveBar from "./components/profile.jsx";
+import AddCars from "./components/AddCars.jsx";
+import RenderedCars from "./components/RenderedCars.jsx";
+import Update from "./components/Update.jsx";
+
+
 
 class App extends React.Component {
   constructor(props) {
@@ -73,7 +78,19 @@ class App extends React.Component {
   render() {
     return (
       <div>
+
         <Switch>
+        <Route exact path="/RenderedCars">
+            {" "}
+            <RenderedCars/>
+          </Route>
+         <Route exact path="/AddCars">
+            {" "}
+            <AddCars/>
+          </Route>
+        {/* <Route exact path ="/Update"
+        {" "}
+        </Route> */}
           <Route exact path="/">
             {" "}
             <Homepage />
@@ -94,6 +111,9 @@ class App extends React.Component {
               onSubmit={this.handleSubmit.bind(this)}
               cars={this.state.cars}
             />{" "}
+          </Route>
+          <Route path="/Update/:id">
+            <Update />
           </Route>
           <SimpleContainer />
         </Switch>

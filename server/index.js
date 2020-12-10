@@ -17,12 +17,12 @@ app.use(bodyParser.urlencoded({
 }));
 
 //Get request to render all cars in stock db table when opening the inventory page.
-app.get("/allcars", (req, res) => {
-    let query = `SELECT * FROM cars`
-    myDB.con.query(query, (err, results) => {
-        res.send(results)
-    })
-})
+// app.get("/allcars", (req, res) => {
+//     let query = `SELECT * FROM cars`
+//     myDB.con.query(query, (err, results) => {
+//         res.send(results)
+//     })
+// })
 
 const users = [];
 
@@ -105,7 +105,7 @@ function authenticateToken(req, res, next) {
 }
 
 app.get('/posts', authenticateToken, (req, res) => {
-    res.status(200).send("you are Authenticated");
+    res.status(200).send("you are authenticated");
 })
 
 //search a car by filtering code
@@ -154,6 +154,60 @@ app.post('/inventory', (req, res) => {
     }
 });
 
+
+// Add Cars
+
+
+//POST(CREATE) new item
+app.post('/AddCars',(req, res) => {
+
+    const brand = req.body.brand;
+    const year = req.body.year;
+    const colour = req.body.colour;
+    const image = req.body.image;
+
+    myDB.con.query(`Insert into cars (brand, year, colour,image) VALUES ('${brand}','${year}','${colour}','${colour}')`, (err, result) => {
+        if (err) throw err;
+    })
+    res.send("car added");
+  });
+
+//GET all cars
+
+  app.get('/cars', (req, res) => {
+    // let query = `SELECT * FROM cars`
+    myDB.con.query(`select * from cars`, (err, result) => {
+        if (err) throw err;
+        res.send(result)
+        console.log(result,"heyyyy")
+    })
+});
+
+// get by ID ..
+app.get('/Update/:id', (req, res) => {
+    // let query = `SELECT * FROM cars`
+
+    myDB.con.query(`select * from cars where id = ${req.params.id}`, (err, result) => {
+        if (err) throw err;
+        res.send(result)
+    })
+});
+
+
+// Update ..
+
+app.post('/Update/:id', (req, res) => {
+    var query = 'UPDATE cars SET brand = ?, year =?, colour = ? WHERE id= ?';
+
+   myDB.con.query(query,[req.body.brand, req.body.year,req.body.colour,req.params.id],(error, results, fields) => {
+    if (error){
+      return console.error(error.message);
+    }
+  });
+})
+
+
+
 // Handles any requests that don't match the ones above
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/../react-client/dist/index.html'));
@@ -163,4 +217,5 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`)
 });
+
 
