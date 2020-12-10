@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import { storage } from "./firebase"
-// import TextField from "@material-ui/core/TextField";
 import Button from '@material-ui/core/Button';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
 
 
-
+import Header from "./header.jsx";
 
 export default class AddCars extends Component {
     constructor(props) {
@@ -128,126 +132,97 @@ export default class AddCars extends Component {
 
     render() {
         return (
+          <div>
+            <Header />
+            <br /><br />
+            <br /><br />
 
-        <div>
-          {/* <form className={classes.root} noValidate autoComplete="off"> */}
-
-             <p>Add Car Form</p>
+             <h2 style = {{color: "#d41a0d", fontFamily: "Century Gothic"}}><b>Sell Car Form</b></h2>
 
              <div>
-
-            <label> Select Brand </label>
-
-            <select
-            required
-            value={this.state.brand}
-            onChange={this.onChangeBrand}
-            // inputProps={{
-            //   name: "Select brand",
-            //   id: "filled-age-native-simple",
-            // }}
-            >
-
-            <option value="all">Select All</option>
-            <option value="BMW">BMW</option>
-            <option value="Ford">Ford</option>
-            <option value="Chevrolet">Chevrolet</option>
-            <option value="Dodge">Dodge</option>
-            </select>
+              <FormControl>
+                <InputLabel>Brand</InputLabel>
+                <Select
+                required
+                value={this.state.brand}
+                onChange={this.onChangeBrand}
+                >
+                  <MenuItem value="all">Select</MenuItem>
+                  <MenuItem value="BMW">BMW</MenuItem>
+                  <MenuItem value="Ford">Ford</MenuItem>
+                  <MenuItem value="Chevrolet">Chevrolet</MenuItem>
+                  <MenuItem value="Dodge">Dodge</MenuItem>
+                </Select>
+              </FormControl>
           </div>
 
+          <br /><br />
 
             <div>
-            <label>Select Year</label>
-            <select
-            required
-            value={this.state.year}
-            onChange={this.onChangeYear}
-            // style={{ margin: "50px 10px 10px 0px" }}
-            // native
-            // value={this.state.value}
-            // onChange={this.onChangeYearHandler.bind(this)}
-            // inputProps={{
-            //   name: "Select year",
-            //   id: "filled-age-native-simple",
-            // }}
-            >
-
-            <option value="2007">2007</option>
-            <option value="2008">2008</option>
-            <option value="2010">2010</option>
-            <option value="2011">2011</option>
-            <option value="2012">2012</option>
-            <option value="2013">2013</option>
-            <option value="2014">2014</option>
-            <option value="2017">2017</option>
-            <option value="2020">2020</option>
-          </select>
+              <FormControl>
+                <InputLabel>Year</InputLabel>
+                <Select
+                  required
+                  value={this.state.year}
+                  onChange={this.onChangeYear}
+                >
+                  <MenuItem value="2007">2007</MenuItem>
+                  <MenuItem value="2008">2008</MenuItem>
+                  <MenuItem value="2010">2010</MenuItem>
+                  <MenuItem value="2011">2011</MenuItem>
+                  <MenuItem value="2012">2012</MenuItem>
+                  <MenuItem value="2013">2013</MenuItem>
+                  <MenuItem value="2014">2014</MenuItem>
+                  <MenuItem value="2017">2017</MenuItem>
+                  <MenuItem value="2020">2020</MenuItem>
+                  </Select>
+              </FormControl>
             </div>
+
+            <br /><br />
 
             <div>
-            <label>Select Colour</label>
-            <select
-            required
-            value={this.state.colour}
-            onChange={this.onChangeColour}
-            // style={{ margin: "50px 10px 10px 0px" }}
-            // native
-            // value={this.state.value}
-            // onChange={this.onChangeColourHandler.bind(this)}
-            // inputProps={{
-            //   name: "Select colour",
-            //   id: "filled-age-native-simple",
-            // }}
-            >
-
-            <option value="black">Black</option>
-            <option value="gray">Gray</option>
-            <option value="white">White</option>
-            <option value="blue">Blue</option>
-            <option value="orange">Orange</option>
-          </select>
+              <FormControl>
+                <InputLabel>Color</InputLabel>
+                <Select
+                  required
+                  value={this.state.colour}
+                  onChange={this.onChangeColour}
+                  >
+                  <MenuItem value="black">Black</MenuItem>
+                  <MenuItem value="gray">Gray</MenuItem>
+                  <MenuItem value="white">White</MenuItem>
+                  <MenuItem value="blue">Blue</MenuItem>
+                  <MenuItem value="orange">Orange</MenuItem>
+                </Select>
+              </FormControl>
             </div>
 
-            {/* <div>
-            <label>Select Price Range</label>
-            <select
-            style={{ margin: "50px 10px 10px 0px" }}
-            native
-            value={this.state.value}
-            onChange={this.onChangePriceHandler.bind(this)}
-            inputProps={{
-              name: "Select price",
-              id: "filled-age-native-simple",
-            }}
-            >
-            <option aria-label="None" value="" />
-            <option value="highestToLowest">Highest to lowest</option>
-            <option value="lowestToHighest">Lowest to highest</option>
-          </select>
-            </div> */}
+            <br /><br />
 
-            <br />
-                <div className = "col">
-                    <label>Add Image </label>
-                    <input
-                      type = "file"
-                      // required="true"
-                      // className = "form-control"
-                      // value = {this.state.image}
-                      onChange = {this.onChangeimg}/>
-                      <button onClick = {this.handleUpload}>Upload</button>
-                      <br />
-                      <img width="50px" src = {this.state.url || "http://via.placeholder.com/100x150"} alt = "firebase-image" />
-                  </div>
-                  <br />
+            <div className = "col">
+                <InputLabel>Add Image </InputLabel>
+                <TextField
+                  type = "file"
+                  onChange = {this.onChangeimg}/>
+
+                <Button onClick = {this.handleUpload}>Upload</Button>
+
+            <br /><br />
+
+                <img width="100px" src = {this.state.url || "http://via.placeholder.com/1000x1000"} alt = "firebase-image" />
+
+            </div>
+
+            <br /><br />
+
             <div>
-            <Button variant="outlined" color="secondary" type="submit" value = "Submit" onClick = {this.onSubmit}>
-              Submit
-            </Button>
-                {/* <button type="submit" value = "Submit" onClick = {this.onSubmit}>Submit</button> */}
+                <Button variant="outlined" color="secondary" type="submit" value = "Submit" onClick = {this.onSubmit}>
+                  Submit
+                </Button>
+
             </div>
-            {/* </form> */}
+
         </div>
 
         )

@@ -56,9 +56,9 @@ export default class Signup extends React.Component {
   onChangeHandle(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
-  submitHandle(firstName, lastName, username, email, password) {
-    console.log(this.state.firstName, this.state.lastName);
-    var info = {
+  submitHandle(e) {
+  //  console.log(this.state.firstName, this.state.lastName);
+    var user = {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       username: this.state.username,
@@ -66,25 +66,17 @@ export default class Signup extends React.Component {
       password: this.state.password,
     };
     if (
-      info.firstName == "" ||
-      info.lastName == "" ||
-      info.username == "" ||
-      info.email == ""
+      user.firstName == "" ||
+      user.lastName == "" ||
+      user.username == "" ||
+      user.email == ""
     ) {
       alert("Please fill in a valid value for all required fields!");
     }
-    if (0 < info.password.length && info.password.length < 8) {
+    if (0 < user.password.length && user.password.length < 8) {
       alert("Your password is too short, try to make it 8 chars or more!");
     } else {
-      // for hashing the password
-      $.ajax({
-        url: "/users",
-        method: "POST",
-        data: JSON.stringify(info),
-        contentType: "application/json",
-        success: (user) => {
-          // if hashing succeded the save the users data
-          console.log(user, "hashing successeded from clientside");
+
           $.ajax({
             url: "/signup",
             method: "POST",
@@ -92,18 +84,13 @@ export default class Signup extends React.Component {
             contentType: "application/json",
             success: (data) => {
               console.log(data, "post method successeded ");
-              window.location = "http://localhost:3000/login";
+              window.location = "/login";
             },
             error: (err) => {
-              console.log(err, "post method failed");
-            },
-          });
-        },
-        error: (err) => {
-          console.log(err, "hashing failed");
-        },
-      });
-    }
+              console.log(err, "Sign up post method failed");
+             }
+          })
+        }
   }
 
   //render the signup form

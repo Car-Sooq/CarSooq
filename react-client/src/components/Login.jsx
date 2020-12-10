@@ -56,23 +56,23 @@ export default class Login extends React.Component {
   }
 
   //getting (retrieving) user's data from the server (token)
-  loginHandler(token) {
-    $.ajax({
-      url: "/posts",
-      method: "GET",
-      data: { token },
-      contentType: "application/json",
-      success: function (data) {
-        console.log("get req/login sent successfully!");
-        if (formUsernameIsValid && formPasswordIsValid) {
-          window.location = "http://localhost:3000/profile";
-        }
-      },
-      error: function (err) {
-        console.log(err, "get req/login failed!");
-      },
-    });
-  }
+  // loginHandler(token) {
+  //   $.ajax({
+  //     url: "/posts",
+  //     method: "GET",
+  //     data: { token },
+  //     contentType: "application/json",
+  //     success: function (data) {
+  //       console.log("get req/login sent successfully!");
+  //       if (formUsernameIsValid && formPasswordIsValid) {
+  //         window.location = "/profile";
+  //       }
+  //     },
+  //     error: function (err) {
+  //       console.log(err, "get req/login failed!");
+  //     },
+  //   });
+  // }
 
   //send user's data along with the request to the server where we can verify users ans store tokens in their local storage
   handleClick() {
@@ -86,6 +86,7 @@ export default class Login extends React.Component {
       success: function (data) {
         console.log("POST req/handleClick sent successfully!");
         localStorage.setItem("token", data);
+        window.location = "/";
         that.loginHandler(data);
       },
       error: function (err) {
@@ -166,11 +167,3 @@ export default class Login extends React.Component {
     );
   }
 }
-
-// mysql://
-// bc7eadcb51dbab
-// :
-// cc2fcc61
-// @
-// us-cdbr-east-02.cleardb.com
-// /heroku_884141679345aa3?reconnect=true
